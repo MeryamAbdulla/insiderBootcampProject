@@ -28,12 +28,16 @@ pipline {
                 script {
                     dir('/User/maryamabdullayeva/.jenkins/workspace/InsiderFinalProject') {
                         echo 'Automation Process running...'
-                            sh 'pip3 install -r requirements.txt'
-                            sh 'pwd'
+                        sh 'python3 -m venv venv'
+                        sh 'source venv/bin/activate'
+                        sh 'pip install -r requirements.txt'
+                        sh 'pwd'
+                        sh 'python3 tests/test_pom_violation.py'
                     }
                 }
             }
         }
+
 
         post {
             always {
