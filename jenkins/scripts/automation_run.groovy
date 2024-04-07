@@ -7,6 +7,13 @@ pipline {
     }
 
     stages {
+        
+        stage('Git Checkout') {
+            steps {
+                git branch: 'main', credentialsId: 'github', url: 'https://github.com/MeryamAbdulla/insiderBootcampProject.git'
+            }
+        }
+
         stage('Get Branch Name') {
             steps {
                 script {
