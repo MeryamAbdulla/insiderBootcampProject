@@ -60,8 +60,16 @@ class CareerPage(BasePage):
         self.driver.execute_script("window.scrollTo(1, 1);")
 
     def click_quality_assurance(self):
-        time.sleep(5)
-        loadmoredata = self.driver.find_element(*self.loadmoredata_class)
-        elements = loadmoredata.find_elements(By.XPATH, '//*[@id="career-find-our-calling"]/div/div/div[2]/div[12]/div[2]/a')
-        self.driver.execute_script("arguments[0].click();", elements[0])
-        return QualityAssurance(self.driver)
+        try:
+            time.sleep(5)
+            loadmoredata = self.driver.find_element(*self.loadmoredata_class)
+            elements = loadmoredata.find_elements(By.XPATH,
+                                                  '//*[@id="career-find-our-calling"]/div/div/div[2]/div[12]/div[2]/a')
+            self.driver.execute_script("arguments[0].click();", elements[0])
+            test_status = "passed"
+        except AssertionError:
+            test_status = "failed"
+            raise
+        finally:
+            self.take_screenshot("quality_assurance_clicked " + test_status)
+            return QualityAssurance(self.driver)

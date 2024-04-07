@@ -11,10 +11,6 @@ class QualityAssurance(BasePage):
         super().__init__(driver)
 
 
-    def take_screenshot(self, test_satus):
-        filename =f"screenshot_{test_satus}.png"
-        self.driver.save_screenshot(filename)
-
     def see_all_jobs(self):
         self.driver.find_element(*self.see_all_jobs_button).click()
         return OpenPositionPage(self.driver)

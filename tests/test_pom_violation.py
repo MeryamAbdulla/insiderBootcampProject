@@ -19,8 +19,6 @@ class TestPomViolation(BaseTest):
 
 
     def test_pom_violation(self):
-
-        test_status = ""
         home_page = HomePage(self.driver)
         home_page.click_company_link()
         career_page = home_page.click_career_link()
@@ -37,19 +35,12 @@ class TestPomViolation(BaseTest):
                 print("AssertionError occurred:", e)
                 raise e
 
-        try:
             quality_assurance = career_page.click_quality_assurance()
+            time.sleep(5)
             open_position = quality_assurance.see_all_jobs()
             time.sleep(6)
             open_position.click_filter_by_location()
             open_position.click_filter_by_department()
-            test_satus = "passed"
-        except AssertionError:
-            test_satus = "failed"
-            raise
-        finally:
-            quality_assurance.take_screenshot("quality_assurance.png")
-            open_position.take_screenshot("open_position")
             time.sleep(3)
             open_position.get_job_list()
             open_position.click_view_role()
